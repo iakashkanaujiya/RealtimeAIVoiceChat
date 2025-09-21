@@ -248,7 +248,7 @@ async function setupAudioWorklet(stream) {
             bufferSize += pcmData.length;
 
             // Send when buffer reaches target size
-            if (bufferSize >= targetBufferSize) {
+            if (bufferSize >= targetBufferSize && isPlaying === false) {
                 // Combine all buffered chunks
                 const combinedBuffer = new Int16Array(bufferSize);
                 let offset = 0;

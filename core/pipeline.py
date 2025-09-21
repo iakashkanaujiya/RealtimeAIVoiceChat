@@ -80,9 +80,6 @@ class VoicePipeline:
         self.tasks = []
         self.shutdown_event = asyncio.Event()
 
-        # When tts is playing at client side
-        self.is_tts_playing = False
-
     async def start(self):
         """Start the voice processing pipeline"""
         logger.info("🚀 Starting Voice Processing Pipeline")
@@ -238,7 +235,7 @@ class VoicePipeline:
                 except asyncio.TimeoutError:
                     continue
 
-                if "bytes" in data and self.is_tts_playing is False:
+                if "bytes" in data:
                     raw_bytes = data["bytes"]
 
                     if len(raw_bytes) < self.config.header_bytes:
@@ -255,14 +252,6 @@ class VoicePipeline:
                     # Create a audio chunk to hold the data
                     audio_chunk = AudioChunk(flag=flag, timestamp=ts, audio=pcm)
                     self._add_queue_no_wait(self.incoming_queue, audio_chunk)
-
-                elif "text" in data:
-                    data = json.loads(data["text"])
-
-                    if data["type"] == "tts_start":
-                        self.is_tts_playing = True
-                    elif data["type"] == "tts_end":
-                        self.is_tts_playing = False
 
         except asyncio.CancelledError:
             logger.debug("🚫 process_incoming_data task cancelled")

@@ -64,7 +64,7 @@ def init_chat_model(
 
         return ChatGroq(
             model=model,
-            api_key=load_api_key("google_api_key"),
+            api_key=load_api_key("groq_api_key"),  # Fixed: was "google_api_key"
             temperature=temperature,
         )
 
