@@ -384,8 +384,8 @@ function handleUserTranscriptStart() {
 
 function handleUserTranscriptDelta(content, timestamp) {
     transcriptEl.innerText += content;
-    if (transcriptEl.innerText.length > 100) {
-        transcriptEl.innerText = "..." + transcriptEl.innerText.slice(-80); // Keep last 80 chars
+    if (transcriptEl.innerText.length >= 120) {
+        transcriptEl.innerText = "..." + transcriptEl.innerText.slice(-120); // Keep last 120 chars
     }
     console.log("User transcript delta:", content);
 }
@@ -411,8 +411,8 @@ function handleAISpeechStart() {
 
 function handleAITextDelta(content, timestamp) {
     transcriptEl.innerText += content;
-    if (transcriptEl.innerText.length > 100) {
-        transcriptEl.innerText = "..." + transcriptEl.innerText.slice(-80); // Keep last 80 chars
+    if (transcriptEl.innerText.length >= 120) {
+        transcriptEl.innerText = "..." + transcriptEl.innerText.slice(-120); // Keep last 120 chars
     }
     console.log("AI text delta:", content);
 }
