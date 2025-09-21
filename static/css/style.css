@@ -1,0 +1,236 @@
+:root {
+    --background-color: #030617;
+    --glow-color: #4d89ff;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+    background-color: var(--background-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* We create three layers of stars for a parallax effect */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+    background-repeat: repeat;
+    animation: animateStars 50s linear infinite;
+}
+
+/* The animation is now applied directly here */
+#stars1 {
+    animation: scrollStars 50s linear infinite;
+}
+
+#stars2 {
+    animation: scrollStars 100s linear infinite;
+}
+
+#stars3 {
+    animation: scrollStars 150s linear infinite;
+}
+
+/* UPDATED Keyframe animation for a seamless loop */
+@keyframes scrollStars {
+    from {
+        background-position-y: 0px;
+    }
+
+    to {
+        /* The value should be the height of the texture image if you use your own */
+        /* For this texture, a large value works perfectly for a slow scroll. */
+        background-position-y: 1000px;
+    }
+}
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.voice-assistant-window {
+    width: 350px;
+    height: 450px;
+    /* background: rgba(13, 27, 61, 0.8); */
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.voice-assistant-window::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 20% 20%,
+            rgba(255, 255, 255, 0.03) 1.2px,
+            transparent 1px),
+        radial-gradient(circle at 80% 80%,
+            rgba(255, 255, 255, 0.03) 1.2px,
+            transparent 1px);
+    background-size: 20px 20px;
+    pointer-events: none;
+}
+
+.transcript {
+    color: #e0e0e0;
+    font-size: 22px;
+    text-align: left;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    flex-grow: 1;
+    display: flex;
+    /* align-items: center; */
+    justify-content: flex-start;
+}
+
+.transcript strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.sound-wave-container {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.sound-wave {
+    width: 4px;
+    height: 50px;
+    background: #4a90e2;
+    margin: 0 5px;
+    border-radius: 2px;
+    animation: wave 1.2s infinite ease-in-out;
+    transform-origin: bottom;
+}
+
+.sound-wave:nth-child(2) {
+    animation-delay: -1.1s;
+    background-color: #8ab4f8;
+}
+
+.sound-wave:nth-child(3) {
+    animation-delay: -1s;
+}
+
+.sound-wave:nth-child(4) {
+    animation-delay: -0.9s;
+    background-color: #8ab4f8;
+}
+
+.sound-wave:nth-child(5) {
+    animation-delay: -0.8s;
+}
+
+.record-button {
+    background: #fff;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.record-button.recording {
+    background: #4a90e2;
+    box-shadow: 0 0 25px rgba(74, 144, 226, 0.8);
+}
+
+.record-button:hover {
+    transform: scale(1.1);
+}
+
+.glowing-arc {
+    position: absolute;
+    top: 200px;
+    width: 1000px;
+    height: 1000px;
+    border-radius: 50%;
+    border-bottom: 5px solid #4a90e2;
+    box-shadow: 0 10px 50px rgba(74, 144, 226, 0.7),
+        inset 0 0 30px rgba(74, 144, 226, 0.5);
+    z-index: 1;
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: scaleY(0.1);
+    }
+
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- Error Toast --- */
+.error-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #dc3545;
+    /* Red */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 1000;
+}
+
+.error-toast.show {
+    opacity: 1;
+    visibility: visible;
+}

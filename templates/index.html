@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GBT Voice Assistant</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <style>
+      .visualizer {
+        width: 100%;
+        height: 100px;
+        position: absolute;
+        bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="stars" id="stars1"></div>
+    <div class="stars" id="stars2"></div>
+    <div class="stars" id="stars3"></div>
+    <div class="container">
+      <div class="voice-assistant-window">
+        <p id="transcript" class="transcript">
+          Click the Mic button to start the conversation with Airline Agent, Cera!
+        </p>
+        <canvas id="visualizer" class="visualizer"></canvas>
+        <button id="record-button" class="record-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-mic"
+          >
+            <path
+              d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"
+            ></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="glowing-arc"></div>
+      <div id="error-toast" class="error-toast"></div>
+    </div>
+    <script src="/static/js/visualizer.js"></script>
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
