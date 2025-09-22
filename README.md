@@ -2,6 +2,8 @@
 
 A sophisticated real-time voice conversation system featuring Emirates Airlines customer service AI agent. Built with FastAPI, WebSockets, and advanced AI models for seamless voice interactions.
 
+[![Watch the demo](https://img.youtube.com/vi/gGxS_OsxwEQ/0.jpg)](https://youtu.be/gGxS_OsxwEQ)
+
 ## ✨ Features
 
 ### 🎯 Core Functionality
